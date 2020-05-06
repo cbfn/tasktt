@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TaskStoreContext } from "../store/tasks";
 
-export default function BugForm() {
+export default function TaskForm() {
   const store = useContext(TaskStoreContext);
   const [task, setTask] = useState("");
 

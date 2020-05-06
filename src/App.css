@@ -106,7 +106,32 @@ main .counter {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 6em;
+  flex-direction: column;
   width: 50%;
   transition: ease-in-out 0.25s width;
+}
+main .counter .task-counter {
+  font-size: 4em;
+  color: rgba(0, 0, 0, 0.3);
+}
+main .counter .task-timer {
+  font-size: 4em;
+}
+.task-list {
+  display: contents;
+}
+/* Animation */
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
 }
