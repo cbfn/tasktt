@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useObserver } from "mobx-react";
-import { TaskStoreContext } from "../store/tasks";
+import { StoreContext } from "../App";
 
 export default function TasksCounter() {
-  const store = useContext(TaskStoreContext);
+  const { TasksStore: store } = useContext(StoreContext);
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
 

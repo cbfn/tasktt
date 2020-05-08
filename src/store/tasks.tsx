@@ -1,40 +1,22 @@
-import React, { createContext, ReactNode } from "react";
-import { useLocalStore } from "mobx-react";
+import { decorate, observable, action } from "mobx";
+class Store {
+  tasks = [];
 
-import Props from "prop-types";
-
-interface TaskStoreContext {
-  tasks: Array<string>;
-  addTask: Function;
-  removeTask: Function;
-  tasksCount: number;
+  addTask(task: never) {
+    this.tasks.push(task);
+  }
+  removeTask(index: number) {
+    this.tasks.splice(index, 1);
+  }
+  get tasksCount() {
+    return this.tasks.length;
+  }
 }
 
-export const TaskStoreContext = createContext<TaskStoreContext | undefined>(
-  undefined
-);
+decorate(Store, {
+  addTask: action,
+  removeTask: action,
+  tasks: observable,
+});
 
-type Props = {
-  children: ReactNode;
-};
-
-export const TasksStoreProvider = ({ children }: Props) => {
-  const store = useLocalStore(() => ({
-    tasks: new Array(),
-    addTask: (task: never) => {
-      store.tasks.push(task);
-    },
-    removeTask: (index: number) => {
-      store.tasks.splice(index, 1);
-    },
-    get tasksCount() {
-      return store.tasks.length;
-    },
-  }));
-
-  return (
-    <TaskStoreContext.Provider value={store}>
-      {children}
-    </TaskStoreContext.Provider>
-  );
-};
+export const TasksStore = new Store();
