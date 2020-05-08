@@ -47,6 +47,13 @@ header form button {
   border-bottom-right-radius: 100px;
 }
 
+header .avatar img {
+  border-radius: 40px;
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+}
+
 main {
   display: flex;
   height: calc(100% - 80px);
