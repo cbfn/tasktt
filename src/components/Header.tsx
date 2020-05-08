@@ -5,6 +5,7 @@ import TaskForm from "./Form";
 
 export default function Header() {
   const { UserStore: store } = useContext(StoreContext);
+
   return useObserver(() => (
     <header className="App-header">
       <h1>POMODX</h1>
