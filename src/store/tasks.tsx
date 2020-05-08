@@ -1,4 +1,4 @@
-import { decorate, observable, action } from "mobx";
+import { decorate, observable, action, computed } from "mobx";
 class Store {
   tasks = [];
 
@@ -17,6 +17,7 @@ decorate(Store, {
   addTask: action,
   removeTask: action,
   tasks: observable,
+  tasksCount: computed,
 });
 
 export const TasksStore = new Store();
