@@ -1,17 +1,26 @@
 import React, { useContext } from "react";
-import { useObserver } from "mobx-react";
-import { StoreContext } from "../App";
 import TaskForm from "./Form";
+import { useObserver } from "mobx-react";
+import { UserStoreContext } from "../store/users";
+import Gravatar from "react-gravatar";
 
-export default function Header() {
-  const { UserStore: store } = useContext(StoreContext);
+export default function Header({ history }) {
+  const store = useContext(UserStoreContext);
+
+  function handleClick() {
+    store?.logout();
+    history.push("/login");
+  }
 
   return useObserver(() => (
     <header className="App-header">
-      <h1>POMODX</h1>
+      <h1>tasktt</h1>
       <TaskForm />
       <div className="avatar">
-        <img src={store?.currentUser.avatar} alt={store.currentUser.name} />
+        <Gravatar email={store?.currentUser.email} />
+        <div onClick={handleClick} className="logout">
+          Logout
+        </div>
       </div>
     </header>
   ));

@@ -1,19 +1,23 @@
 import React, { useContext } from "react";
-import { useObserver } from "mobx-react";
-import { StoreContext } from "../App";
 import TaskList from "./List";
 import TasksCounter from "./Counter";
+import Header from "./Header";
+import { useObserver } from "mobx-react";
+import { TaskStoreContext } from "../store/tasks";
 
-export default function Main() {
-  const { TasksStore: store } = useContext(StoreContext);
+export default function Main(props) {
+  const store = useContext(TaskStoreContext);
 
   return useObserver(() => {
     const hasTasks = store?.tasksCount && store?.tasksCount > 0;
     return (
-      <main className={`${hasTasks ? "" : "full"}`}>
-        <TaskList />
-        <TasksCounter />
-      </main>
+      <>
+        <Header history={props.history} />
+        <main className={`${hasTasks ? "" : "full"}`}>
+          <TaskList />
+          <TasksCounter />
+        </main>
+      </>
     );
   });
 }

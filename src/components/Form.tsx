@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { StoreContext } from "../App";
+import { TaskStoreContext } from "../store/tasks";
 
 export default function TaskForm() {
-  const { TasksStore: store } = useContext(StoreContext);
+  const store = useContext(TaskStoreContext);
   const [task, setTask] = useState("");
 
   function handleChange(e: any) {

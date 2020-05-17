@@ -1,10 +1,10 @@
 import React, { useContext, useRef } from "react";
 import { useObserver } from "mobx-react";
-import { StoreContext } from "../App";
+import { TaskStoreContext } from "../store/tasks";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function TaskList() {
-  const { TasksStore: store } = useContext(StoreContext);
+  const store = useContext(TaskStoreContext);
 
   const nodeRef = useRef(null);
   return useObserver(() => (
