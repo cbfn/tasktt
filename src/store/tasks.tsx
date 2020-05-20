@@ -25,9 +25,9 @@
 import React, { createContext, ReactNode } from "react";
 import Props from "prop-types";
 import { useLocalStore } from "mobx-react";
+import { tasks } from "../firebase";
 
 interface TaskStoreContext {
-  tasks: Array<string>;
   addTask: Function;
   removeTask: Function;
   tasksCount: number;
@@ -42,16 +42,18 @@ type Props = {
 };
 
 export const TasksStoreProvider = ({ children }: Props) => {
+  const { docs } = tasks;
   const store = useLocalStore(() => ({
-    tasks: new Array<string>(),
-    addTask: (task: string) => {
-      store.tasks.push(task);
+    addTask: async (task: string) => {
+      await tasks.add({
+        title: task,
+      });
     },
-    removeTask: (index: number) => {
-      store.tasks.splice(index, 1);
+    removeTask: async (task) => {
+      await task.delete();
     },
     get tasksCount() {
-      return store.tasks.length;
+      return docs.length;
     },
   }));
 

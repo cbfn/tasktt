@@ -1,8 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { initFirestorter, Collection, Document } from "firestorter";
 
-const firebaseConfig = {
+firebase.initializeApp({
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
   databaseURL: process.env.REACT_APP_DATABASEURL,
@@ -11,9 +12,20 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
   appId: process.env.REACT_APP_APPID,
   measurementId: process.env.REACT_APP_MEASUREMENTID,
-};
+});
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+initFirestorter({ firebase: firebase });
 
 export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+// export const firestore = firebase.firestore();
+export interface TaskType {
+  title: string;
+}
+
+export type Task = Document<TaskType>;
+
+export type Tasks = Collection<Task>;
+
+const tasks = new Collection<Task>("tasks");
+
+export { tasks };

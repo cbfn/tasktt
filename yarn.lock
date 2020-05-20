@@ -4912,6 +4912,13 @@ firebase@^7.14.4:
     "@firebase/storage" "0.3.33"
     "@firebase/util" "0.2.46"
 
+firestorter@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/firestorter/-/firestorter-2.0.1.tgz#9fc1f67377134651cda15cc0cc0f4243d91a65b3"
+  integrity sha512-DN9p+mrAy6pzGSzrEIw24IS06xh8RrexUtxaMVNg1VQwZAuQq3fwzbEEAo5V7VkNo0HithkIJiPs3CDe/09lIQ==
+  dependencies:
+    lodash.isequal "^4.5.0"
+
 flat-cache@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"
@@ -6889,6 +6896,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
