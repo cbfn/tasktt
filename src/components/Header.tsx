@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import TaskForm from "./Form";
 import { useObserver } from "mobx-react";
 import { UserStoreContext } from "../store/users";
 import Gravatar from "react-gravatar";
@@ -15,7 +14,6 @@ export default function Header({ history }) {
   return useObserver(() => (
     <header className="App-header">
       <h1>tasktt</h1>
-      <TaskForm />
       <div className="avatar">
         <Gravatar email={store?.currentUser.email} />
         <div onClick={handleClick} className="logout">

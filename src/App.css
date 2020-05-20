@@ -21,39 +21,12 @@ header h1 {
   font-weight: 400;
 }
 
-header form {
-  margin-left: auto;
-}
-
-header form input {
-  border: none;
-  height: 40px;
-  width: 300px;
-  padding: 0 20px;
-  font-size: 16px;
-  vertical-align: middle;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
-
-header form button {
-  height: 40px;
-  padding: 0 20px;
-  font-size: 0.75em;
-  font-weight: 700;
-  vertical-align: middle;
-  border: none;
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-}
-
 header .avatar {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
 }
 
 header .avatar img {
@@ -92,7 +65,7 @@ main ul {
   list-style-position: inside;
   list-style-type: none;
   overflow: auto;
-  width: 50%;
+  width: 33%;
   transition: ease-in-out 0.25s width;
   background: white;
 }
@@ -126,6 +99,38 @@ main ul li:nth-child(2n) {
   font-size: 1.25em;
 }
 
+main ul li form {
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 0 20px 20px;
+  margin: 0 -20px 0 -20px;
+}
+
+main ul li form input {
+  border: none;
+  height: 40px;
+  width: calc(100% - 123px);
+  background-color: #f2f2f2;
+  padding: 0 0 0 20px;
+  font-size: 16px;
+  vertical-align: middle;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+main ul li form button {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 0.75em;
+  font-weight: 700;
+  vertical-align: middle;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
 main .counter {
   margin: 0;
   padding: 20px;
@@ -134,7 +139,7 @@ main .counter {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 50%;
+  width: 67%;
   transition: ease-in-out 0.25s width;
 }
 main .counter .task-counter {

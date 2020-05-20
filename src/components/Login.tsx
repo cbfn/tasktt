@@ -11,7 +11,7 @@ export default function Login(props) {
     event.preventDefault();
     user
       ?.login(email, password)
-      .then((res) => {
+      .then((res: any) => {
         user?.authenticateUser(res);
         props.history.push("/");
       })
