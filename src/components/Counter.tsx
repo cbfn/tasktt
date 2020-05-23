@@ -1,36 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { TaskStoreContext } from "../store/tasks";
+import React, { useContext } from "react";
+import { storesContext } from "../store/stores";
 
 export default function TasksCounter() {
-  const store = useContext(TaskStoreContext);
-  // const [minutes, setMinutes] = useState(5);
-  // const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    // const counterInterval = setInterval(() => {
-    //   if (seconds > 0) {
-    //     setSeconds(seconds - 1);
-    //   }
-    //   if (seconds === 0) {
-    //     if (minutes === 0) {
-    //       clearInterval(counterInterval);
-    //     } else {
-    //       setMinutes(minutes - 1);
-    //       setSeconds(59);
-    //     }
-    //   }
-    // }, 1000);
-    // return () => {
-    //   clearInterval(counterInterval);
-    // };
-  });
+  const { tasksStore: store } = useContext(storesContext);
 
   return (
     <div className="counter">
-      <div className="task-counter">You have: {store?.tasksCount} tasks!</div>
-      {/* <div className="task-timer">
-        Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-      </div> */}
+      <div className="task-counter">You have: {store.tasksCount} tasks!</div>
     </div>
   );
 }

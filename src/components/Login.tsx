@@ -1,18 +1,18 @@
 import React, { FormEvent, useContext, useState } from "react";
-import { UserStoreContext } from "../store/users";
+import { storesContext } from "../store/stores";
 
 export default function Login(props) {
-  const user = useContext(UserStoreContext);
+  const { userStore: store } = useContext(storesContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    user
-      ?.login(email, password)
+    store
+      .login(email, password)
       .then((res: any) => {
-        user?.authenticateUser(res);
+        store.authenticateUser(res);
         props.history.push("/");
       })
       .catch((error) => {
@@ -28,14 +28,14 @@ export default function Login(props) {
         <input
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder="demo@demo.com"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="123qwe"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />

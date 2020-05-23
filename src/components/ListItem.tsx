@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
-import { useObserver } from "mobx-react";
-import { TaskStoreContext } from "../store/tasks";
+import { storesContext } from "../store/stores";
 
 export default function ListItem({ task }) {
-  const store = useContext(TaskStoreContext);
+  const { tasksStore: store } = useContext(storesContext);
   const item = task.data;
-  return useObserver(() => (
+
+  return (
     <li>
       {item.title}
-      <span onClick={() => store?.removeTask(task)}>DONE</span>
+      <span onClick={() => store.removeTask(task)}>DONE</span>
     </li>
-  ));
+  );
 }

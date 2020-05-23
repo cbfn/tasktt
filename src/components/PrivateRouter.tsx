@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useObserver } from "mobx-react";
-import { UserStoreContext } from "../store/users";
+import { storesContext } from "../store/stores";
 
 function PrivateRouter({ component: Component, ...rest }) {
-  const store = useContext(UserStoreContext);
+  const { userStore: store } = useContext(storesContext);
+
   return useObserver(() => (
     <Route
       {...rest}
       render={(props) => {
-        const isAuthenticated = store?.isAuthenticated();
+        const isAuthenticated = store.isAuthenticated();
 
         if (!isAuthenticated) {
           // not logged in so redirect to login page with the return url

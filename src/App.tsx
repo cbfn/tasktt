@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NotFound from "./components/NotFound";
 import PrivateRouter from "./components/PrivateRouter";
-import { TasksStoreProvider } from "./store/tasks";
-import { UserStoreProvider } from "./store/users";
+import { storesContext, useStores } from "./store/stores";
 import { history } from "./utils/history";
 
 import spinner from "./spinner.svg";
@@ -17,21 +16,20 @@ const Main = lazy(() => import("./components/Main"));
 const Login = lazy(() => import("./components/Login"));
 
 function App() {
+  const stores = useStores();
   return (
     <Router {...history}>
-      <UserStoreProvider>
-        <TasksStoreProvider>
-          <div className="App">
-            <Suspense fallback={<Loading />}>
-              <Switch>
-                <Route path="/login" component={Login} />
-                <PrivateRouter exact path="/" component={Main} />
-                <Route component={NotFound} />
-              </Switch>
-            </Suspense>
-          </div>
-        </TasksStoreProvider>
-      </UserStoreProvider>
+      <storesContext.Provider value={stores}>
+        <div className="App">
+          <Suspense fallback={<Loading />}>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <PrivateRouter exact path="/" component={Main} />
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </div>
+      </storesContext.Provider>
     </Router>
   );
 }
