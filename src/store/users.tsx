@@ -1,25 +1,44 @@
 import { decorate, observable, computed } from "mobx";
+import { auth } from "../firebase";
 
-export interface User {
-  name: string;
+interface IUser {
   email: string;
-  avatar: string;
+  authenticated: boolean;
 }
-class Store {
-  user: User = {
-    name: "Christian Nascimento",
-    email: "cnascimentobr@gmail.com",
-    avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+export class UserStore {
+  user: IUser = {
+    email: "",
+    authenticated: false,
   };
 
   get currentUser() {
-    return this.user;
+    return this.isAuthenticated();
+  }
+
+  isAuthenticated() {
+    const currentUser = JSON.parse(localStorage.getItem("user")!);
+    return currentUser;
+  }
+
+  login(email, password) {
+    return auth.signInWithEmailAndPassword(email, password);
+  }
+
+  authenticateUser(data) {
+    const { user } = data;
+    this.user.authenticated = true;
+    this.user.email = user.email;
+    localStorage.setItem("user", JSON.stringify(this.user));
+  }
+
+  logout() {
+    this.user = { ...this.user };
+    auth.signOut();
+    localStorage.clear();
   }
 }
 
-decorate(Store, {
+decorate(UserStore, {
   user: observable,
   currentUser: computed,
 });
-
-export const UserStore = new Store();

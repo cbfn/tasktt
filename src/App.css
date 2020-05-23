@@ -4,7 +4,7 @@
 }
 
 header {
-  background-color: crimson;
+  background-color: salmon;
   color: white;
   height: 80px;
   display: flex;
@@ -16,42 +16,34 @@ header {
   width: calc(100% - 40px);
 }
 header h1 {
-  font-weight: 300;
+  font-family: "Anron", sans-serif;
+  font-size: 2em;
+  font-weight: 400;
 }
 
-header form {
+header .avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin-left: auto;
-}
-
-header form input {
-  border: none;
-  height: 40px;
-  width: 300px;
-  padding: 0 20px;
-  font-size: 16px;
-  vertical-align: middle;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
-
-header form button {
-  height: 40px;
-  padding: 0 20px;
-  font-size: 14px;
-  font-weight: 700;
-  vertical-align: middle;
-  border: none;
-  background: salmon;
-  color: white;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
 }
 
 header .avatar img {
   border-radius: 40px;
   width: 40px;
   height: 40px;
-  margin-left: 20px;
+  margin: 0 20px;
+}
+
+header .avatar .logout {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 main {
@@ -73,8 +65,9 @@ main ul {
   list-style-position: inside;
   list-style-type: none;
   overflow: auto;
-  width: 50%;
+  width: 33%;
   transition: ease-in-out 0.25s width;
+  background: white;
 }
 
 main ul li {
@@ -106,6 +99,38 @@ main ul li:nth-child(2n) {
   font-size: 1.25em;
 }
 
+main ul li form {
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 0 20px 20px;
+  margin: 0 -20px 0 -20px;
+}
+
+main ul li form input {
+  border: none;
+  height: 40px;
+  width: calc(100% - 123px);
+  background-color: #f2f2f2;
+  padding: 0 0 0 20px;
+  font-size: 16px;
+  vertical-align: middle;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+main ul li form button {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 0.75em;
+  font-weight: 700;
+  vertical-align: middle;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
 main .counter {
   margin: 0;
   padding: 20px;
@@ -114,7 +139,7 @@ main .counter {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 50%;
+  width: 67%;
   transition: ease-in-out 0.25s width;
 }
 main .counter .task-counter {
@@ -141,4 +166,97 @@ main .counter .task-timer {
 .item-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
+}
+
+.login,
+.notfound {
+  background: salmon;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  background: salmon url("./task.svg") no-repeat right bottom;
+  background-size: 50%;
+}
+
+.login h1 {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  text-transform: lowercase;
+  color: white;
+}
+
+.notfound {
+  background: salmon url("./404.svg") no-repeat right bottom;
+  background-size: 50%;
+}
+
+.notfound dl {
+  font-weight: 300;
+  color: white;
+  margin: 0 0 20px;
+  padding: 0;
+  text-align: center;
+}
+
+.notfound dl dt {
+  font-size: 7em;
+}
+
+.notfound dl dd {
+  margin: 0;
+  font-size: 1.25em;
+}
+
+.notfound .btn-link {
+  background-color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: salmon;
+  border-radius: 20px;
+  transition: ease-in 0.25s background-color;
+}
+
+.notfound .btn-link:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.login form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px 30px;
+  border-radius: 4px;
+}
+
+.login form input {
+  border: 1px solid salmon;
+  border-radius: 100px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.login form button {
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  text-transform: uppercase;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+}
+
+.login form .error {
+  background: #ff6963;
+  border-radius: 4px;
+  margin: 10px 0;
+  padding: 10px;
+  color: white;
 }

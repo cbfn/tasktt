@@ -1,38 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useObserver } from "mobx-react";
-import { StoreContext } from "../App";
+import React, { useContext } from "react";
+import { storesContext } from "../store/stores";
 
 export default function TasksCounter() {
-  const { TasksStore: store } = useContext(StoreContext);
-  const [minutes, setMinutes] = useState(5);
-  const [seconds, setSeconds] = useState(0);
+  const { tasksStore: store } = useContext(storesContext);
 
-  useEffect(() => {
-    const counterInterval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(counterInterval);
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(counterInterval);
-    };
-  });
-
-  return useObserver(() => (
+  return (
     <div className="counter">
-      <div className="task-counter">You have: {store?.tasksCount} tasks!</div>
-      <div className="task-timer">
-        Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-      </div>
+      <div className="task-counter">You have: {store.tasksCount} tasks!</div>
     </div>
-  ));
+  );
 }

@@ -1,26 +1,27 @@
-import React, { useContext, useState } from "react";
-import { StoreContext } from "../App";
+import React, { useContext, useState, FormEvent } from "react";
+import { storesContext } from "../store/stores";
 
 export default function TaskForm() {
-  const { TasksStore: store } = useContext(StoreContext);
+  const { tasksStore: store } = useContext(storesContext);
   const [task, setTask] = useState("");
 
-  function handleChange(e: any) {
-    setTask(e.target.value);
+  function handleChange(event: FormEvent<HTMLInputElement>) {
+    setTask(event.currentTarget.value);
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (task === "") {
+      alert("Please provide a task name!");
+      return false;
+    }
+    console.log(task);
+    store.addTask(task);
+    setTask("");
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (task === "") {
-          alert("Please provide a task name!");
-          return false;
-        }
-        store?.addTask(task);
-        setTask("");
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         value={task}

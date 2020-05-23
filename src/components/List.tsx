@@ -1,29 +1,33 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { useObserver } from "mobx-react";
-import { StoreContext } from "../App";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { tasks } from "../firebase";
+import TaskForm from "./Form";
+import ListItem from "./ListItem";
 
 export default function TaskList() {
-  const { TasksStore: store } = useContext(StoreContext);
-
   const nodeRef = useRef(null);
-  return useObserver(() => (
-    <ul>
-      <TransitionGroup className="task-list">
-        {store?.tasks.map((task: any, index: number) => (
-          <CSSTransition
-            key={index}
-            nodeRef={nodeRef}
-            in
-            timeout={600}
-            classNames="item"
-          >
-            <li ref={nodeRef}>
-              {task} <span onClick={() => store.removeTask(index)}>DONE</span>
-            </li>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
-    </ul>
-  ));
+  return useObserver(() => {
+    const { docs } = tasks;
+    return (
+      <ul>
+        <li>
+          <TaskForm />
+        </li>
+        <TransitionGroup className="task-list">
+          {docs.map((task: any, index: number) => (
+            <CSSTransition
+              key={task.id}
+              nodeRef={nodeRef}
+              in
+              timeout={600}
+              classNames="item"
+            >
+              <ListItem task={task} />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      </ul>
+    );
+  });
 }

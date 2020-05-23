@@ -1,19 +1,29 @@
-import React, { useContext } from "react";
-import { useObserver } from "mobx-react";
-import { StoreContext } from "../App";
+import React from "react";
 import TaskList from "./List";
 import TasksCounter from "./Counter";
+import Header from "./Header";
+import { useObserver } from "mobx-react";
+import spinner from "../spinner.svg";
+import { tasks } from "../firebase";
 
-export default function Main() {
-  const { TasksStore: store } = useContext(StoreContext);
+const Loading = () => (
+  <img src={spinner} alt="Loading spinner" className="spinner" />
+);
 
+export default function Main(props) {
   return useObserver(() => {
-    const hasTasks = store?.tasksCount && store?.tasksCount > 0;
-    return (
-      <main className={`${hasTasks ? "" : "full"}`}>
-        <TaskList />
-        <TasksCounter />
-      </main>
+    const { isLoading } = tasks;
+
+    return isLoading ? (
+      <Loading />
+    ) : (
+      <>
+        <Header history={props.history} />
+        <main>
+          <TaskList />
+          <TasksCounter />
+        </main>
+      </>
     );
   });
 }

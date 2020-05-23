@@ -1,23 +1,28 @@
 import { decorate, observable, action, computed } from "mobx";
-class Store {
-  tasks = [];
+import { tasks } from "../firebase";
 
-  addTask(task: never) {
-    this.tasks.push(task);
+const { docs } = tasks;
+export class TasksStore {
+  tasks: Array<string> = [];
+
+  async addTask(task: string) {
+    await tasks.add({
+      title: task,
+    });
   }
-  removeTask(index: number) {
-    this.tasks.splice(index, 1);
+
+  async removeTask(task) {
+    await task.delete();
   }
+
   get tasksCount() {
-    return this.tasks.length;
+    return docs.length;
   }
 }
 
-decorate(Store, {
+decorate(TasksStore, {
   addTask: action,
   removeTask: action,
   tasks: observable,
   tasksCount: computed,
 });
-
-export const TasksStore = new Store();
