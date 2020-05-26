@@ -3,7 +3,7 @@ import { tasks } from "../firebase";
 
 const { docs } = tasks;
 export class TasksStore {
-  tasks: Array<string> = [];
+  tasks: Array<any> = docs;
 
   async addTask(task: string) {
     await tasks.add({

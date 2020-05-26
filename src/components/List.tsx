@@ -1,21 +1,22 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { useObserver } from "mobx-react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { tasks } from "../firebase";
 import TaskForm from "./Form";
 import ListItem from "./ListItem";
+import { storesContext } from "../store/stores";
 
 export default function TaskList() {
   const nodeRef = useRef(null);
+  const { tasksStore: store } = useContext(storesContext);
+
   return useObserver(() => {
-    const { docs } = tasks;
     return (
       <ul>
         <li>
           <TaskForm />
         </li>
         <TransitionGroup className="task-list">
-          {docs.map((task: any, index: number) => (
+          {store.tasks.map((task: any) => (
             <CSSTransition
               key={task.id}
               nodeRef={nodeRef}
@@ -23,7 +24,7 @@ export default function TaskList() {
               timeout={600}
               classNames="item"
             >
-              <ListItem task={task} />
+              <ListItem task={task} fowardRef={nodeRef} />
             </CSSTransition>
           ))}
         </TransitionGroup>

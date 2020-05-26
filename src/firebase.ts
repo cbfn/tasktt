@@ -13,11 +13,11 @@ firebase.initializeApp({
   appId: process.env.REACT_APP_APPID,
   measurementId: process.env.REACT_APP_MEASUREMENTID,
 });
+
 // Initialize Firebase
 initFirestorter({ firebase: firebase });
 
 export const auth = firebase.auth();
-// export const firestore = firebase.firestore();
 export interface TaskType {
   title: string;
 }
@@ -26,6 +26,8 @@ export type Task = Document<TaskType>;
 
 export type Tasks = Collection<Task>;
 
-const tasks = new Collection<Task>("tasks");
+const tasks = new Collection<Task>("tasks", {
+  query: (ref) => ref.orderBy("title"),
+});
 
 export { tasks };

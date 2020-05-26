@@ -15,7 +15,7 @@ export default function TaskForm() {
       alert("Please provide a task name!");
       return false;
     }
-    console.log(task);
+
     store.addTask(task);
     setTask("");
   }

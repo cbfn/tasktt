@@ -3,49 +3,6 @@
   overflow: hidden;
 }
 
-header {
-  background-color: salmon;
-  color: white;
-  height: 80px;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 20px;
-  flex-direction: row;
-  align-items: center;
-  position: fixed;
-  width: calc(100% - 40px);
-}
-header h1 {
-  font-family: "Anron", sans-serif;
-  font-size: 2em;
-  font-weight: 400;
-}
-
-header .avatar {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-}
-
-header .avatar img {
-  border-radius: 40px;
-  width: 40px;
-  height: 40px;
-  margin: 0 20px;
-}
-
-header .avatar .logout {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 24px;
-  padding: 10px 20px;
-  font-weight: 700;
-  font-size: 0.75em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
 main {
   display: flex;
   height: calc(100% - 80px);
