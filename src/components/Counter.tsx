@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { storesContext } from "../store/stores";
+import { storesContext } from "../store";
 
 export default function TasksCounter() {
   const { tasksStore: store } = useContext(storesContext);

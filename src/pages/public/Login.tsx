@@ -1,5 +1,5 @@
 import React, { FormEvent, useContext, useState } from "react";
-import { storesContext } from "../store/stores";
+import { storesContext } from "../../store";
 
 export default function Login(props) {
   const { userStore: store } = useContext(storesContext);

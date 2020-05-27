@@ -1,10 +1,10 @@
 import React from "react";
-import TaskList from "./List";
-import TasksCounter from "./Counter";
-import Header from "./Header";
+import TaskList from "../../components/List";
+import TasksCounter from "../../components/Counter";
+import Header from "../../components/Header";
 import { useObserver } from "mobx-react";
-import spinner from "../spinner.svg";
-import { tasks } from "../firebase";
+import spinner from "../../assets/images/spinner.svg";
+import { tasks } from "../../firebase";
 
 const Loading = () => (
   <img src={spinner} alt="Loading spinner" className="spinner" />

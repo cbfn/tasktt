@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { storesContext } from "../store/stores";
+import { storesContext } from "../store";
 import Gravatar from "react-gravatar";
 
 export default function Header({ history }) {

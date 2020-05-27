@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useObserver } from "mobx-react";
-import { storesContext } from "../store/stores";
+import { storesContext } from "../store";
 
 function PrivateRouter({ component: Component, ...rest }) {
   const { userStore: store } = useContext(storesContext);

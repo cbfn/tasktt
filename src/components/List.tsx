@@ -3,7 +3,7 @@ import { useObserver } from "mobx-react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import TaskForm from "./Form";
 import ListItem from "./ListItem";
-import { storesContext } from "../store/stores";
+import { storesContext } from "../store";
 
 export default function TaskList() {
   const nodeRef = useRef(null);

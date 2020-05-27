@@ -136,7 +136,7 @@ main .counter .task-timer {
 }
 
 .login {
-  background: salmon url("./task.svg") no-repeat right bottom;
+  background: salmon url("./assets/images/task.svg") no-repeat right bottom;
   background-size: 50%;
 }
 
@@ -148,7 +148,7 @@ main .counter .task-timer {
 }
 
 .notfound {
-  background: salmon url("./404.svg") no-repeat right bottom;
+  background: salmon url("./assets/images/404.svg") no-repeat right bottom;
   background-size: 50%;
 }
 
