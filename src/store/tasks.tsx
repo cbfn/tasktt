@@ -5,7 +5,7 @@ import { UserStore } from "./users";
 
 const userStore = new UserStore();
 
-tasks.query = (ref) => ref.where("user_uid", "==", userStore.currentUser.uid);
+tasks.query = (ref) => ref.where("user_uid", "==", userStore?.currentUser.uid);
 
 const userTasks = tasks.docs;
 export class TasksStore {
