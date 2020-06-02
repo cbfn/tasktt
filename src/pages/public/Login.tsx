@@ -2,17 +2,18 @@ import React, { FormEvent, useContext, useState } from "react";
 import { storesContext } from "../../store";
 
 export default function Login(props) {
-  const { userStore: store } = useContext(storesContext);
+  const { userStore, tasksStore } = useContext(storesContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    store
+    userStore
       .login(email, password)
       .then((res: any) => {
-        store.authenticateUser(res);
+        userStore.authenticateUser(res);
+        tasksStore.fetchTasks();
         props.history.push("/");
       })
       .catch((error) => {
