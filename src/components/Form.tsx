@@ -2,7 +2,8 @@ import React, { useContext, useState, FormEvent } from "react";
 import { storesContext } from "../store";
 
 export default function TaskForm() {
-  const { tasksStore: store } = useContext(storesContext);
+  const { tasksStore: store, userStore: user } = useContext(storesContext);
+
   const [task, setTask] = useState("");
 
   function handleChange(event: FormEvent<HTMLInputElement>) {
@@ -16,7 +17,7 @@ export default function TaskForm() {
       return false;
     }
 
-    store.addTask(task);
+    store.addTask(task, user.currentUser.uid);
     setTask("");
   }
 

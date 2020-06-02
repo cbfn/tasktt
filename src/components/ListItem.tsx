@@ -7,7 +7,9 @@ export default function ListItem({ task, fowardRef }) {
 
   return (
     <li ref={fowardRef}>
-      {item.title}
+      <small>
+        {item.title} - {item.created_at}
+      </small>
       <span onClick={() => store.removeTask(task)}>DONE</span>
     </li>
   );

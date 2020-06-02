@@ -1,13 +1,21 @@
-import { decorate, observable, action, computed } from "mobx";
+import { action, computed, decorate, observable } from "mobx";
 import { tasks } from "../firebase";
 
-const { docs } = tasks;
-export class TasksStore {
-  tasks: Array<any> = docs;
+import { UserStore } from "./users";
 
-  async addTask(task: string) {
+const userStore = new UserStore();
+
+tasks.query = (ref) => ref.where("user_uid", "==", userStore.currentUser.uid);
+
+const userTasks = tasks.docs;
+export class TasksStore {
+  tasks: Array<any> = userTasks;
+
+  async addTask(task: string, user: string) {
     await tasks.add({
+      user_uid: user,
       title: task,
+      created_at: new Date().toLocaleString(),
     });
   }
 
@@ -16,7 +24,7 @@ export class TasksStore {
   }
 
   get tasksCount() {
-    return docs.length;
+    return tasks.docs.length;
   }
 }
 

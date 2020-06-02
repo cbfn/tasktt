@@ -19,15 +19,14 @@ initFirestorter({ firebase: firebase });
 
 export const auth = firebase.auth();
 export interface TaskType {
+  user_uid: string;
   title: string;
+  created_at: Date;
 }
 
 export type Task = Document<TaskType>;
-
 export type Tasks = Collection<Task>;
 
-const tasks = new Collection<Task>("tasks", {
-  query: (ref) => ref.orderBy("title"),
-});
+const tasks = new Collection<Task>("tasks");
 
 export { tasks };
