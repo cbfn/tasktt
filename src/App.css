@@ -204,8 +204,9 @@ main .counter .task-timer {
   background: rgba(0, 0, 0, 0.2);
   color: white;
   text-transform: uppercase;
-  height: 40px;
+  padding: 20px;
   font-size: 16px;
+  margin-top: 10px;
   border: none;
 }
 
