@@ -1,4 +1,4 @@
-import { decorate, observable, computed } from "mobx";
+import { decorate, observable, computed, action } from "mobx";
 import { auth } from "../firebase";
 
 interface IUser {
@@ -26,7 +26,7 @@ export class UserStore {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
-  async authenticateUser(data) {
+  authenticateUser(data) {
     const { user } = data;
 
     this.user.authenticated = true;
@@ -44,6 +44,7 @@ export class UserStore {
 }
 
 decorate(UserStore, {
+  authenticateUser: action,
   user: observable,
   currentUser: computed,
 });

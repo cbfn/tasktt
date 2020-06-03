@@ -1,10 +1,16 @@
 import { action, computed, decorate, observable } from "mobx";
-
 import { tasks } from "../firebase";
 
 import { UserStore } from "./users";
+
 export class TasksStore {
-  tasks: Array<any> = this.fetchTasks();
+  tasks: Array<any>;
+  user: any;
+
+  constructor() {
+    this.user = new UserStore();
+    this.tasks = this.fetchTasks();
+  }
 
   async addTask(task: string, user: string) {
     await tasks.add({
@@ -15,12 +21,10 @@ export class TasksStore {
   }
 
   fetchTasks() {
-    const userStore = observable(new UserStore());
-    const userId = userStore.currentUser?.uid;
+    const userId = this.user.currentUser?.uid;
 
     tasks.query = (ref) => {
-      const uId = userId;
-      return uId ? ref.where("user_uid", "==", uId) : null;
+      return userId ? ref.where("user_uid", "==", userId) : null;
     };
 
     return tasks.docs;
