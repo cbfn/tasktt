@@ -1,13 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { storesContext } from "../store";
 import Gravatar from "react-gravatar";
+import { useHistory } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import RootStore from "../stores";
 
-export default function Header({ history }) {
-  const { userStore: store } = useContext(storesContext);
+interface HeaderProps {
+  store?: RootStore;
+}
+
+function Header({ store }: HeaderProps) {
+  const history = useHistory();
 
   function handleClick() {
-    store.logout();
+    store?.userStore.logout();
     history.push("/login");
   }
 
@@ -15,7 +21,7 @@ export default function Header({ history }) {
     <StyledHeader className="App-header">
       <h1>tasktt</h1>
       <div className="avatar">
-        <Gravatar email={store.currentUser.email} />
+        <Gravatar email={store?.userStore.currentUser().email} />
         <div onClick={handleClick} className="logout">
           Logout
         </div>
@@ -23,6 +29,8 @@ export default function Header({ history }) {
     </StyledHeader>
   );
 }
+
+export default inject(({ store }) => ({ store }))(observer(Header));
 
 const StyledHeader = styled.header`
   background-color: salmon;

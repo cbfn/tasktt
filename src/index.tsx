@@ -1,13 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { Provider } from "mobx-react";
+import RootStore from "./stores";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "mobx-react-lite/batchingForReactDom";
 
+const store = new RootStore();
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

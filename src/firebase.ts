@@ -18,6 +18,7 @@ firebase.initializeApp({
 initFirestorter({ firebase: firebase });
 
 export const auth = firebase.auth();
+
 export interface TaskType {
   user_uid: string;
   title: string;

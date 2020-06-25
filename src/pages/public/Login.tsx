@@ -1,25 +1,34 @@
-import React, { FormEvent, useContext, useState } from "react";
-import { storesContext } from "../../store";
+import React, { FormEvent, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import RootStore from "../../stores";
 
-export default function Login(props) {
-  const { userStore, tasksStore } = useContext(storesContext);
+interface LoginProps {
+  store?: RootStore;
+}
+
+function Login({ store }: LoginProps) {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    userStore
+    store?.userStore
       .login(email, password)
-      .then((res: any) => {
-        userStore.authenticateUser(res);
-        tasksStore.fetchTasks();
-        props.history.push("/");
+      .then((data) => {
+        store.userStore.authenticateUser(data);
+        history.push("/");
       })
       .catch((error) => {
-        setError(error.message);
+        setError(error);
       });
   }
+
+  useEffect(() => {
+    if (store?.userStore.isLoggedIn) history.push("/");
+  }, [history, store]);
 
   return (
     <div className="login">
@@ -45,3 +54,5 @@ export default function Login(props) {
     </div>
   );
 }
+
+export default inject(({ store }) => ({ store }))(observer(Login));

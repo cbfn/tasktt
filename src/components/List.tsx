@@ -1,34 +1,27 @@
-import React, { useRef, useContext } from "react";
-import { useObserver } from "mobx-react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import React, { useEffect } from "react";
 import TaskForm from "./Form";
 import ListItem from "./ListItem";
-import { storesContext } from "../store";
-
-export default function TaskList() {
-  const nodeRef = useRef(null);
-  const { tasksStore: store } = useContext(storesContext);
-
-  return useObserver(() => {
-    return (
-      <ul>
-        <li>
-          <TaskForm />
-        </li>
-        <TransitionGroup className="task-list">
-          {store.tasks.map((task: any) => (
-            <CSSTransition
-              key={task.id}
-              nodeRef={nodeRef}
-              in
-              timeout={600}
-              classNames="item"
-            >
-              <ListItem task={task} fowardRef={nodeRef} />
-            </CSSTransition>
-          ))}
-        </TransitionGroup>
-      </ul>
-    );
-  });
+import RootStore from "../stores";
+import { inject, observer } from "mobx-react";
+interface TaskListProps {
+  store?: RootStore;
 }
+
+function TaskList({ store }: TaskListProps) {
+  useEffect(() => {
+    store?.tasksStore.fetchTasks();
+  }, [store]);
+
+  return (
+    <ul>
+      <li>
+        <TaskForm />
+      </li>
+      {store?.tasksStore.tasks.map((task: any) => {
+        return <ListItem task={task} key={task.id} />;
+      })}
+    </ul>
+  );
+}
+
+export default inject(({ store }) => ({ store }))(observer(TaskList));

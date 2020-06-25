@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
-import { storesContext } from "../store";
-
-export default function TasksCounter() {
-  const { tasksStore: store } = useContext(storesContext);
-
+import React from "react";
+import { inject, observer } from "mobx-react";
+import RootStore from "../stores";
+interface TasksCounterProps {
+  store?: RootStore;
+}
+function TasksCounter({ store }: TasksCounterProps) {
   return (
     <div className="counter">
-      <div className="task-counter">You have: {store.tasksCount} tasks!</div>
+      <div className="task-counter">
+        You have: {store?.tasksStore.tasksCount} tasks!
+      </div>
     </div>
   );
 }
+
+export default inject(({ store }) => ({ store }))(observer(TasksCounter));

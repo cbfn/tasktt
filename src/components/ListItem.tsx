@@ -1,16 +1,21 @@
-import React, { useContext } from "react";
-import { storesContext } from "../store";
+import React from "react";
+import RootStore from "../stores";
 
-export default function ListItem({ task, fowardRef }) {
-  const { tasksStore: store } = useContext(storesContext);
+interface ListItemProps {
+  store?: RootStore;
+  task: {
+    data;
+  };
+}
+export default function ListItem({ store, task }: ListItemProps) {
   const item = task.data;
 
   return (
-    <li ref={fowardRef}>
+    <li>
       <small>
         {item.title} - {item.created_at}
       </small>
-      <span onClick={() => store.removeTask(task)}>DONE</span>
+      <span onClick={() => store?.tasksStore.removeTask(task)}>DONE</span>
     </li>
   );
 }

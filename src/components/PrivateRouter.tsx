@@ -1,16 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useObserver } from "mobx-react";
-import { storesContext } from "../store";
+import { inject, observer } from "mobx-react";
+import RootStore from "../stores";
 
-function PrivateRouter({ component: Component, ...rest }) {
-  const { userStore: store } = useContext(storesContext);
+interface PrivateRouterProps {
+  component;
+  store?: RootStore;
+  [x: string]: any;
+}
 
-  return useObserver(() => (
+function PrivateRouter({
+  component: Component,
+  store,
+  ...rest
+}: PrivateRouterProps) {
+  return (
     <Route
       {...rest}
       render={(props) => {
-        const isAuthenticated = store.isAuthenticated();
+        const isAuthenticated = store?.userStore.isLoggedIn;
 
         if (!isAuthenticated) {
           // not logged in so redirect to login page with the return url
@@ -25,7 +33,7 @@ function PrivateRouter({ component: Component, ...rest }) {
         return <Component {...props} />;
       }}
     />
-  ));
+  );
 }
 
-export default PrivateRouter;
+export default inject(({ store }) => ({ store }))(observer(PrivateRouter));
