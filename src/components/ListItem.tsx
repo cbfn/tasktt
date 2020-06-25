@@ -1,5 +1,6 @@
 import React from "react";
 import RootStore from "../stores";
+import { inject, observer } from "mobx-react";
 
 interface ListItemProps {
   store?: RootStore;
@@ -7,9 +8,10 @@ interface ListItemProps {
     data;
   };
 }
-export default function ListItem({ store, task }: ListItemProps) {
-  const item = task.data;
 
+function ListItem({ store, task }: ListItemProps) {
+  const item = task.data;
+  console.log(item);
   return (
     <li>
       <small>
@@ -19,3 +21,5 @@ export default function ListItem({ store, task }: ListItemProps) {
     </li>
   );
 }
+
+export default inject(({ store }) => ({ store }))(observer(ListItem));

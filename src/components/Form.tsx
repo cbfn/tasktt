@@ -20,7 +20,7 @@ function TaskForm({ store }: TaskFormProps) {
       return false;
     }
 
-    store?.tasksStore.addTask(task, store?.userStore.user.uid);
+    store?.tasksStore.addTask(task);
     setTask("");
   }
 

@@ -11,13 +11,12 @@ export default class TasksStore {
     this.rootStore = rootStore;
   }
 
-  @action addTask(task: string, user: string) {
+  @action addTask(task: string) {
     tasks.add({
-      user_uid: user,
+      user_uid: this.rootStore.userStore.currentUser().uid,
       title: task,
       created_at: new Date().toLocaleString(),
     });
-    this.fetchTasks();
   }
 
   @action fetchTasks() {
@@ -27,7 +26,7 @@ export default class TasksStore {
       return userId ? ref.where("user_uid", "==", userId) : null;
     };
 
-    autorun(async () => {
+    autorun(() => {
       const { docs, isLoading } = tasks;
       this.tasks = docs;
       this.IS_LOADING = isLoading;

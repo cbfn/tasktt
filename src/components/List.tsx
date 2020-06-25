@@ -12,6 +12,17 @@ function TaskList({ store }: TaskListProps) {
     store?.tasksStore.fetchTasks();
   }, [store]);
 
+  if (store?.tasksStore.IS_LOADING) {
+    return (
+      <ul>
+        <li>
+          <TaskForm />
+        </li>
+        <div>Loading...</div>
+      </ul>
+    );
+  }
+
   return (
     <ul>
       <li>
