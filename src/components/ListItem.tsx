@@ -14,10 +14,12 @@ function ListItem({ store, task }: ListItemProps) {
   console.log(item);
   return (
     <li>
-      <small>
+      <div>
         {item.title} - {item.created_at}
-      </small>
-      <span onClick={() => store?.tasksStore.removeTask(task)}>DONE</span>
+      </div>
+      <button type="button" onClick={() => store?.tasksStore.removeTask(task)}>
+        DONE
+      </button>
     </li>
   );
 }

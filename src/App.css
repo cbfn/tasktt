@@ -22,7 +22,7 @@ main ul {
   list-style-position: inside;
   list-style-type: none;
   overflow: auto;
-  width: 33%;
+  width: 100%;
   transition: ease-in-out 0.25s width;
   background: white;
 }
@@ -33,8 +33,9 @@ main ul li {
   flex-direction: row;
 }
 
-main ul li span {
+main ul li button {
   margin-left: auto;
+  border: none;
   background: rgba(0, 0, 0, 0.2);
   font-size: 12px;
   display: inline-block;
@@ -45,7 +46,7 @@ main ul li span {
   transition: ease-in-out 0.25s background;
 }
 
-main ul li span:hover {
+main ul li button:hover {
   background: white;
   color: salmon;
 }
@@ -85,25 +86,6 @@ main ul li form button {
   color: white;
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
-}
-
-main .counter {
-  margin: 0;
-  padding: 20px;
-  background-color: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 67%;
-  transition: ease-in-out 0.25s width;
-}
-main .counter .task-counter {
-  font-size: 4em;
-  color: rgba(0, 0, 0, 0.3);
-}
-main .counter .task-timer {
-  font-size: 4em;
 }
 .task-list {
   display: contents;
