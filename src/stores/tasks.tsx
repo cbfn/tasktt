@@ -11,11 +11,12 @@ export default class TasksStore {
     this.rootStore = rootStore;
   }
 
-  @action addTask(task: string) {
+  @action addTask(task: string, date: any) {
     tasks.add({
       user_uid: this.rootStore.userStore.currentUser().uid,
       title: task,
-      created_at: new Date().toLocaleString(),
+      created_at: new Date(),
+      deadline: date,
     });
   }
 

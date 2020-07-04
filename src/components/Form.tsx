@@ -8,6 +8,7 @@ interface TaskFormProps {
 
 function TaskForm({ store }: TaskFormProps) {
   const [task, setTask] = useState("");
+  const [date, setDate] = useState("");
 
   function handleChange(event: FormEvent<HTMLInputElement>) {
     setTask(event.currentTarget.value);
@@ -20,18 +21,36 @@ function TaskForm({ store }: TaskFormProps) {
       return false;
     }
 
-    store?.tasksStore.addTask(task);
+    const dateCondition = date === "" ? new Date() : date;
+
+    store?.tasksStore.addTask(task, dateCondition);
     setTask("");
+  }
+
+  function handleDate(e) {
+    setDate(e.target.value);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={task}
-        placeholder="Name of the task"
-        onChange={handleChange}
-      />
+      <fieldset>
+        <input
+          type="text"
+          value={task}
+          placeholder="Name of the task"
+          onChange={handleChange}
+          className="task"
+        />
+      </fieldset>
+      <fieldset>
+        <input
+          type="date"
+          value={date}
+          placeholder="Date"
+          onChange={handleDate}
+          className="date"
+        />
+      </fieldset>
       <button type="submit">ADD TASK</button>
     </form>
   );

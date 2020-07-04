@@ -11,11 +11,10 @@ interface ListItemProps {
 
 function ListItem({ store, task }: ListItemProps) {
   const item = task.data;
-  console.log(item);
   return (
     <li>
       <div>
-        {item.title} - {item.created_at}
+        {item.title} - {item.deadline}
       </div>
       <button type="button" onClick={() => store?.tasksStore.removeTask(task)}>
         DONE

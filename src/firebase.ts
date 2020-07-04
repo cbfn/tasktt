@@ -23,6 +23,7 @@ export interface TaskType {
   user_uid: string;
   title: string;
   created_at: Date;
+  deadline: Date;
 }
 
 export type Task = Document<TaskType>;
