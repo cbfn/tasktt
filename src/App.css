@@ -4,7 +4,7 @@
 }
 
 main {
-  display: flex;
+  background-color: #fff;
   height: calc(100% - 80px);
   padding-top: 80px;
 }
@@ -18,19 +18,13 @@ main.full ul {
 
 main ul {
   margin: 0;
-  padding: 0;
+  padding: 0 !important;
   list-style-position: inside;
   list-style-type: none;
   overflow: auto;
   width: 100%;
   transition: ease-in-out 0.25s width;
   background: white;
-}
-
-main ul li {
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
 }
 
 main ul li button {
@@ -49,11 +43,6 @@ main ul li button {
 main ul li button:hover {
   background: white;
   color: salmon;
-}
-
-main ul li:nth-child(2n) {
-  background-color: salmon;
-  color: white;
 }
 
 main ul li form {

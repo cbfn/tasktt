@@ -1,57 +1,67 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { TextField, Button } from "@material-ui/core";
+import { KeyboardDatePicker } from "@material-ui/pickers";
 import RootStore from "../stores";
 
 interface TaskFormProps {
   store?: RootStore;
+  onClose: VoidFunction;
 }
 
-function TaskForm({ store }: TaskFormProps) {
+function TaskForm({ store, onClose }: TaskFormProps) {
   const [task, setTask] = useState("");
-  const [date, setDate] = useState("");
+  const [selectedDate, handleDateChange] = useState<Date | null>(new Date());
 
-  function handleChange(event: FormEvent<HTMLInputElement>) {
+  function handleChange(event) {
     setTask(event.currentTarget.value);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event) {
     event.preventDefault();
     if (task === "") {
       alert("Please provide a task name!");
       return false;
     }
 
-    const dateCondition = date === "" ? new Date() : date;
-
-    store?.tasksStore.addTask(task, dateCondition);
+    store?.tasksStore.addTask(task, selectedDate);
     setTask("");
-  }
-
-  function handleDate(e) {
-    setDate(e.target.value);
+    onClose();
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset>
-        <input
-          type="text"
-          value={task}
-          placeholder="Name of the task"
-          onChange={handleChange}
-          className="task"
-        />
-      </fieldset>
-      <fieldset>
-        <input
-          type="date"
-          value={date}
-          placeholder="Date"
-          onChange={handleDate}
-          className="date"
-        />
-      </fieldset>
-      <button type="submit">ADD TASK</button>
+      <TextField
+        label="Name of the task"
+        value={task}
+        onChange={handleChange}
+      />
+
+      <KeyboardDatePicker
+        disableToolbar
+        variant="inline"
+        format="MM/dd/yyyy"
+        margin="normal"
+        id="date-picker-inline"
+        label="Date picker inline"
+        value={selectedDate}
+        onChange={handleDateChange}
+        KeyboardButtonProps={{
+          "aria-label": "change date",
+        }}
+      />
+
+      <Button
+        type="submit"
+        style={{
+          marginTop: 20,
+          color: "white",
+          background: "salmon",
+          width: "100%",
+        }}
+      >
+        ADD TASK
+      </Button>
     </form>
   );
 }

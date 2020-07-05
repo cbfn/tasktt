@@ -28,10 +28,7 @@ code {
   margin-left: -32px;
   margin-top: -32px;
 }
-.spinner:before {
-  position: fixed;
-  background: salmon;
-  content: "";
-  width: 100%;
-  height: 100%;
+
+.makeStyles-paper-1 {
+  outline: none;
 }
